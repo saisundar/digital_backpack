@@ -17,6 +17,9 @@ git config --global alias.last 'log -1 HEAD'
 
 alias SR="scribereader"
 alias SRP="scribereader -e sfo2"
+alias PROD="ssh -A adhoc-sfo2"
+alias DEV="ssh -A dev2-devc"
+
 
 genCtag() {
 if [ $# -eq 0 ]
