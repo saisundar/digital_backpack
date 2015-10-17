@@ -132,6 +132,8 @@ map [1;3D <C-W>W
 set hlsearch
 "highlight Search ctermfg =yellow  cterm=bold term=reverse guibg=NONE ctermbg = NONE
 
+set relativenumber
+
 " Turn on autosave.
 set autowrite
 
