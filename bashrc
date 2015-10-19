@@ -2,7 +2,7 @@ if [ "$YELP_IN_SANDBOX" ]; then
     export PS1="$PS1(sandbox)\$ "
 fi
 
-PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\]\[\e[1;37m\]'
+PS1='\[\e[0;32m\]\u@\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\]\[\e[1;37m\]'
 
 export HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
