@@ -102,14 +102,6 @@ map <leader>gw :Gwrite<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gc :Gcommit<CR>
 
-"indent guide settings
-au FileType python IndentGuidesEnable
-au FileType python set background=dark
-au FileType python let indent_guides_auto_colors = 0
-au FileType python autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd    ctermbg=236
-au FileType python autocmd VimEnter,Colorscheme * :hi IndentGuidesEven   ctermbg=240
-au FileType python let indent_guides_guide_size = 2
-
 " generic settings-----soois
 set nu
 command WQ wq
