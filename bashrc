@@ -1,19 +1,39 @@
-if [ "$YELP_IN_SANDBOX" ]; then
-    export PS1="$PS1(sandbox)\$ "
-fi
+#!/usr/bin/env bash
 
-PS1='\[\e[0;32m\]\u@\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\]\[\e[1;37m\]'
+# Path to the bash it configuration
+export BASH_IT="/nail/home/saisundr/.bash_it"
+
+# Lock and Load a custom theme file
+# location /.bash_it/themes/
+export BASH_IT_THEME='nwinkler'
+
+# Your place for hosting Git repos. I use this for private repos.
+export GIT_HOSTING='git@git.domain.com'
+
+# Don't check mail when opening terminal.
+unset MAILCHECK
+
+# Change this to your console based IRC client of choice.
+export IRC_CLIENT='irssi'
+
+# Set this to the command you use for todo.txt-cli
+export TODO="t"
+
+# Set this to false to turn off version control status checking within the prompt for all themes
+export SCM_CHECK=true
+
+# Set vcprompt executable path for scm advance info in prompt (demula theme)
+# https://github.com/xvzf/vcprompt
+#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+
+# Load Bash It
+source $BASH_IT/bash_it.sh
 
 export HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
 export HISTFILESIZE=20000
 export HISTSIZE=10000
 HISTTIMEFORMAT="%d/%m/%y %T "
-
-git config --global alias.co checkout
-git config --global alias.br branch
-git config --global alias.sub 'reset HEAD --'
-git config --global alias.last 'log -1 HEAD'
 
 alias SR="scribereader"
 alias SRP="scribereader -e sfo2"
@@ -173,4 +193,3 @@ else
     cd ~/pg/yelp-main
 fi    
 }
-
