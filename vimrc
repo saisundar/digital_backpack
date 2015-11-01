@@ -27,13 +27,13 @@ Plugin 'airblade/vim-gitgutter'
 "static analysis/syntax
 Plugin 'klen/python-mode'
 "autocomplete
-Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+Plugin 'SirVer/ultisnips' 
 Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
@@ -65,6 +65,11 @@ let g:airline#extensions#fugitive#enabled = 1
 
 " nerdtree-tabs settings
 let g:nerdtree_tabs_open_on_console_startup=1
+
+" ultisnips settings
+let g:UltiSnipsExpandTrigger="<c-d>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-v>"
 
 "ctrlp settings
 map <leader>cp :CtrlPMRUFiles<CR>
