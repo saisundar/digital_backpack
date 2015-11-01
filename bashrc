@@ -5,7 +5,7 @@ export BASH_IT="/nail/home/saisundr/.bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-export BASH_IT_THEME='nwinkler'
+export BASH_IT_THEME='luan'
 
 # Your place for hosting Git repos. I use this for private repos.
 export GIT_HOSTING='git@git.domain.com'

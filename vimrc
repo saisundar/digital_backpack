@@ -71,6 +71,10 @@ let g:UltiSnipsExpandTrigger="<c-d>"
 let g:UltiSnipsJumpForwardTrigger="<c-f>"
 let g:UltiSnipsJumpBackwardTrigger="<c-v>"
 
+" YCM settings
+let g:ycm_autoclose_preview_window_after_completion=1
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 "ctrlp settings
 map <leader>cp :CtrlPMRUFiles<CR>
 noremap <leader>b :CtrlPBuffer<CR>
