@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ "$TERM" != "screen" ]; then
+    # if the auth socket variable is empty, don't do anything
+    if [ ! -z "$SSH_AUTH_SOCK" ]; then
+        # include USER to protect against shared HOME directories (rare)
+        NEWSOCK=$HOME/.agent-sshtmux-$USER.sock
+        if [ "$SSH_AUTH_SOCK" != "$NEWSOCK" ]; then
+            # test if the auth sock we have is actually working
+            # don't link to a dead socket
+            if ssh-add -l > /dev/null 2>&1; then
+                /bin/ln -sf $SSH_AUTH_SOCK $NEWSOCK
+                export SSH_AUTH_SOCK=$NEWSOCK
+            fi
+        fi
+    fi
+    if [ -x /usr/bin/tmux ]; then
+        exec /usr/bin/tmux "$@"
+    elif [ -x /usr/local/bin/tmux ]; then
+        exec /usr/local/bin/tmux "$@"
+    else
+        echo "$0: can't find tmux, aborting" >&2
+        exit 1
+    fi
+else
+    echo "$0: can't start up tmux inside tmux" >&2
+    exit 1
+fi
