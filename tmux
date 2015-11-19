@@ -8,7 +8,7 @@ set-option -g default-terminal "screen-256color"
 bind r source-file ~/.tmux.conf
 
 # Count sessions start at 1
-set -g base-index 1
+set-option -g base-index 1
 
 # Use vim bindings
 #setw -g mode-keys vi
@@ -37,4 +37,4 @@ bind-key -t vi-copy 'y' copy-selection
 set -g mouse-select-pane on
 set -g mouse-resize-pane on
 set -g mouse-select-window on
-
+set-option -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION SSH_TTY WINDOWID XAUTHORITY"
