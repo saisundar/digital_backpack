@@ -11,7 +11,7 @@ alias PROD="ssh -A adhoc-sfo2"
 alias DEV="ssh -A dev2-devc"
 alias vi="~/bin/vim"
 alias vim="~/bin/vim"
-alias mux="/nail/sys/bin/agenttmux"
+alias mux="~/digi_backpack/tmux-agent"
 
 
 genCtag() {
