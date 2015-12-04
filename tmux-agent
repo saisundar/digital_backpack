@@ -14,10 +14,10 @@ if [ "$TERM" != "screen" ]; then
             fi
         fi
     fi
-    if [ -x /usr/bin/tmux ]; then
+    if [ -x $HOME/myapps/binaries/tmux ]; then
+        exec $HOME/myapps/binaries/tmux "$@"
+    elif [ -x /usr/bin/tmux ]; then
         exec /usr/bin/tmux "$@"
-    elif [ -x /usr/local/bin/tmux ]; then
-        exec /usr/local/bin/tmux "$@"
     else
         echo "$0: can't find tmux, aborting" >&2
         exit 1
