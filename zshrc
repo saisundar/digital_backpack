@@ -6,10 +6,10 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-#ZSH_THEME="half-life"
+ZSH_THEME="half-life"
 #ZSH_THEME="miloshadzic"
 #ZSH_THEME="nanotech"
-ZSH_THEME="juanghurtado"
+#ZSH_THEME="juanghurtado"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -87,3 +87,4 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/digi_backpack/sai_alias
+fpath=(~/digi_backpack/zshcompletions $fpath)

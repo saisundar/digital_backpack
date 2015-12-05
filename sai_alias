@@ -70,19 +70,6 @@ else
 fi
 }
 
-CO() {
-mkdir tmp
-cd tmp
-COM="`git branch`"
-select BRANCH in $COM
-do
-    git co $BRANCH
-    cd ..
-    rm -r tmp
-    break
-done
-}
-
 Col() { awk '{print $('$(echo $* | sed -e s/-/NF-/g -e 's/ /),$(/g')')}'; }
 
 GitGrab() {
@@ -154,16 +141,5 @@ done
 
 
 Repme() {
-if [ $# -eq 0 ]
-then
-    cd ~/scratchspace/repos
-    select REPO in `ls`
-    do
-        cd $REPO
-        break
-    done
-else
-    cd ~/pg/yelp-main
-fi    
+    cd ~/scratchspace/repos/$1
 }
-
