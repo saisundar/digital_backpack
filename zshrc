@@ -87,4 +87,3 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/digi_backpack/sai_alias
-fpath=(~/digi_backpack/zshcompletions $fpath)
