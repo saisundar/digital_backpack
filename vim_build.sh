@@ -46,8 +46,8 @@ fi
 
 make && make install || exit 1
 
-ln -sfv $dst/bin/vim     $HOME/bin
-ln -sfv $dst/bin/vimdiff $HOME/bin
+ln -sfv $dst/bin/vim     $HOME/digi_backpack/bin
+ln -sfv $dst/bin/vimdiff $HOME/digi_backpack/bin
 
 echo
 $dst/bin/vim --version | head | grep --color "VIM - Vi IMproved 7.4"

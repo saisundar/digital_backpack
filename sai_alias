@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 export HISTCONTROL=ignoreboth:erasedups
-shopt -s histappend
 export HISTFILESIZE=20000
 export HISTSIZE=10000
 HISTTIMEFORMAT="%d/%m/%y %T "
@@ -9,8 +8,9 @@ alias SR="scribereader"
 alias SRP="scribereader -e sfo2"
 alias PROD="ssh -A adhoc-sfo2"
 alias DEV="ssh -A dev2-devc"
-alias vi="~/bin/vim"
-alias vim="~/bin/vim"
+alias vi="~/digi_backpack/bin/vim"
+alias vim="~/digi_backpack/bin/vim"
+alias tmux="~/digi_backpack/tmux-agent"
 alias mux="~/digi_backpack/tmux-agent"
 
 
@@ -23,51 +23,6 @@ then
 else
     /usr/bin/ctags -L <(find . -name '*.py') --fields=+iaS --python-kinds=-i --sort=yes --extra=+q --exclude=./virtualenv_emr/
 fi    
-}
-
-ApplyPatch() {
-
-cd ~/patchfiles/
-select PATCH in `ls`;
-do
-    cd -
-    echo $PWD
-    echo "output of git apply --check" 
-    git apply --check ~/patchfiles/$PATCH
-    echo "applying... "
-    git apply  ~/patchfiles/$PATCH
-    break
-done
-
-}
-
-Patch() {
-filename=""
-fail=0
-name="random_name.patch"
-while [ "$1" != "" ]; do
-    case $1 in
-        -f | --file )           shift
-                                filename=$1
-                                ;;
-        -n | --patchname )      shift
-                                name=$1
-                                ;;
-        -h | --help )           fail=1
-                                ;;
-        * )                     usage
-                                fail=1
-    esac
-    shift
-done
-if [ $fail -ne 1 ]
-then
-    git diff $filename > ~/patchfiles/$name
-    echo "patchfile created at ~/patchfiles/$name"
-    cat ~/patchfiles/$name
-else
-    echo "usage: Patch -f <filename> -n <what to patch>"
-fi
 }
 
 Col() { awk '{print $('$(echo $* | sed -e s/-/NF-/g -e 's/ /),$(/g')')}'; }
@@ -118,28 +73,9 @@ do
 done
 }
 
-GitFiles() {
-
-mkdir tmp
-cd tmp
-COM="`git log --oneline|head -20|tr " " "_"`"
-select COMMIT in $COM
-do
-    COMM=`echo $COMMIT|tr "_" " "|Col 1`
-    FILES=`git diff-tree --no-commit-id --name-only -r $COMM |tr "\n" " "`
-    cd ..
-    rm -fr tmp
-    if [ $# -eq 1 ]
-    then
-        vim -p $FILES
-    else
-        echo $FILES|tr " " "\n"
-    fi    
-    break
-done
-}
-
-
 Repme() {
     cd ~/scratchspace/repos/$1
 }
+
+_repos=(`ls ~/scratchspace/repos`)
+compctl -k _repos Repme
