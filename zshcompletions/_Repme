@@ -1,0 +1,3 @@
+#compdef Repme
+
+#_files -W ~/scratchspace/repos/ -g ~/scratchspace/repos/*

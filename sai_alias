@@ -10,20 +10,9 @@ alias PROD="ssh -A adhoc-sfo2"
 alias DEV="ssh -A dev2-devc"
 alias vi="~/digi_backpack/bin/vim"
 alias vim="~/digi_backpack/bin/vim"
-alias tmux="~/digi_backpack/tmux-agent"
 alias mux="~/digi_backpack/tmux-agent"
+alias gmnf="gm --no-ff"
 
-
-genCtag() {
-if [ $# -eq 0 ]
-then
-    make clean
-    make
-    /usr/bin/ctags -L <(find . -name '*.py') --fields=+iaS --python-kinds=-i --sort=yes --extra=+q --exclude=./virtualenv_emr/
-else
-    /usr/bin/ctags -L <(find . -name '*.py') --fields=+iaS --python-kinds=-i --sort=yes --extra=+q --exclude=./virtualenv_emr/
-fi    
-}
 
 Col() { awk '{print $('$(echo $* | sed -e s/-/NF-/g -e 's/ /),$(/g')')}'; }
 
@@ -35,42 +24,6 @@ echo $paths
 git clone $paths /scratch/saisundr/repos/`basename $1`
 cd ~/scratchspace/repos/`basename $1`
 
-}
-
-GitDiffy() {
-
-if [ $# -eq 1 ]
-then
-    git diff $1^ $1
-else
-    git diff $2 $1    
-fi    
-
-}
-
-GitAdd() {
-mkdir tmp
-cd tmp
-COM="`git diff --name-only`"
-select FILE in $COM
-do
-    git add ../$FILE
-    cd ..
-    rm -r tmp
-    break
-done
-}
-
-GitReset() {
-mkdir tmp
-cd tmp
-COM="`git diff --name-only`"
-select FILE in $COM
-do
-    git co -- ../$FILE
-    cd ..
-    [ -e tmp ] && rm -r tmp
-done
 }
 
 Repme() {

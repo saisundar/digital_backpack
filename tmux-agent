@@ -1,6 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [ "$TERM" != "screen" ]; then
+if [[ "$0" == *"agenttmux2"* ]]
+then
+    TMUX_VER=tmux2
+else
+    TMUX_VER=tmux
+fi
+
+if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
     # if the auth socket variable is empty, don't do anything
     if [ ! -z "$SSH_AUTH_SOCK" ]; then
         # include USER to protect against shared HOME directories (rare)
@@ -14,12 +21,11 @@ if [ "$TERM" != "screen" ]; then
             fi
         fi
     fi
-    if [ -x $HOME/myapps/binaries/tmux ]; then
-        exec $HOME/myapps/binaries/tmux "$@"
-    elif [ -x /usr/bin/tmux ]; then
-        exec /usr/bin/tmux "$@"
+    TMUX_BIN=$(which $TMUX_VER)
+    if [ -n "$TMUX_BIN" ]; then
+        exec $TMUX_BIN "$@"
     else
-        echo "$0: can't find tmux, aborting" >&2
+        echo "$0: can't find $TMUX_VER, aborting" >&2
         exit 1
     fi
 else

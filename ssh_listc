@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+# ssh-list machine ... -- command arg arg ...
+#
+# connect to each machine and run command
+
+sshopts="-A -T -o KbdInteractiveAuthentication=no -o PasswordAuthentication=no"
+
+# Import the systems.d enviornment
+#
+if [ "${TESTROOT+set}" ] ; then
+    source ${TESTROOT}/systems.d/lib/main
+else
+    source /etc/systems.d/lib/main
+fi
+
+function usage() {
+    echo "Usage: $0 <group | node> ... -- <cmd>"
+    echo "Known groups:"
+    known_groups | column
+    exit 0
+}
+
+if [ $# -eq 0 ]; then
+    usage
+fi
+
+# we don't take any optional args and they break host and group name parsing
+case $1 in
+    -*|--*)
+        usage
+        ;;
+esac
+
+SELECTED_HOSTS=""
+ACTIVE_HOSTS=""
+while [ $# -ne 0 ]; do
+    if [ "x$1" == 'x--' ]; then
+        shift
+        break
+    fi
+    hostlist=$( get_group_hostnames "$1" 2>/dev/null )
+    if [ -n "$hostlist" ]; then
+        SELECTED_HOSTS="$SELECTED_HOSTS $hostlist"
+        ACTIVE_HOSTS="$ACTIVE_HOSTS "$(filter_pingable $hostlist 2>/dev/null)
+    else
+        SELECTED_HOSTS="$SELECTED_HOSTS $1"
+        is_host_pingable "$1"
+        if [ $? -eq 0 ]; then
+            ACTIVE_HOSTS="$ACTIVE_HOSTS $1"
+        fi
+    fi
+    shift
+done
+
+# remove dupes
+SELECTED_HOSTS=$(reasonable_sort "$SELECTED_HOSTS" | xargs)
+ACTIVE_HOSTS=$(reasonable_sort "$ACTIVE_HOSTS" | xargs)
+
+# find missing hosts
+UNAVAILABLE_HOSTS=$(comm -13 <(tr ' ' '\n' <<< "$ACTIVE_HOSTS") <(tr ' ' '\n' <<< "$SELECTED_HOSTS") 2>/dev/null | xargs)
+
+echo "Available Hosts: $ACTIVE_HOSTS"
+echo "Unavailable Hosts: $UNAVAILABLE_HOSTS"
+
+if [ $# -eq 0 ]; then
+    echo "No command specified, skipping ssh"
+    exit 0
+fi
+
+echo "Running Command: $@"
+
+LONGESTNAME=`longest_string "$ACTIVE_HOSTS"`
+format="%- ${LONGESTNAME}s| %s"
+
+for host in $ACTIVE_HOSTS ; do
+    ( ssh $sshopts "$host" "$@" 2>&1 ) | perl -e '
+        while ($_ = <STDIN>) {
+            chomp;
+            printf $ARGV[0]."\n", $ARGV[1], $_;
+        }' "$format" "$host"
+        #printf "'"$format"'", "'"$host"'", $_;
+done
+
