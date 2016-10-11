@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ "$0" == *"agenttmux2"* ]]
-then
-    TMUX_VER=tmux2
-else
-    TMUX_VER=tmux
-fi
+TMUX_VER=tmux2
 
 if [ "$TERM" != "screen" ] && [ -z "$TMUX" ]; then
     # if the auth socket variable is empty, don't do anything
