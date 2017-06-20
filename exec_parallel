@@ -1,0 +1,103 @@
+#!/nail/home/saisundr/scratchspace/repos/onpoint/fab/bin/python
+# -*- coding: utf-8 -*-
+
+import argparse
+import re
+
+from fabric.api import (
+    execute,
+    hide,
+    parallel,
+    run,
+    with_settings,
+)
+from fabric.exceptions import NetworkError
+
+import logging
+
+
+log = logging.getLogger(__name__)
+fabric_kwargs = {
+    'skip_bad_hosts': True,
+    'disable_known_hosts': True,
+    'warn_only': True,
+    'forward_agent': True,
+    'connection_attempts': 2,
+    'timeout': 2,
+    'use_ssh_config': True,
+    'ssh_config_path': '/etc/ssh/ssh_config',
+    'proxycommand': True,
+}
+
+
+@with_settings(**fabric_kwargs)
+def run_command_wrapper(host_list, command):
+    @parallel
+    def run_command():
+        with hide('everything'):
+            return run(command)
+    return execute(run_command, hosts=host_list)
+
+
+def run_appropriate_command(host_list, command):
+    result = None
+    valid_host_list = host_list
+    bad_host_list = []
+
+    while result is None:
+        try:
+            if not valid_host_list:
+                return {}
+            result = run_command_wrapper(valid_host_list, command)
+        except Exception as e:
+            except_str = str(e)
+            print 'run_appropriate_command: {0}'.format(except_str)
+            match = re.search(r'(\d+\.\d+\.\d+\.\d+)', except_str, re.M)
+            if match:
+                bad_address = match.group(1)
+                print 'Removing bad address: {0}'.format(bad_address)
+                if bad_address in valid_host_list:
+                    bad_host_list.append(bad_address)
+                    valid_host_list = [address for address in valid_host_list if address != bad_address]
+                else:
+                    print 'Bad host not in host list?'
+                    result = {}
+            else:
+                print 'run_appropriate_command: No ip in exception'
+                result = {}
+    for address in bad_host_list:
+        result[address] = NetworkError('Network error connecting to host, '
+                                       'is it reachable yet?')
+    return result
+
+
+def pretty_print(output_dict):
+    for node, output in output_dict.iteritems():
+        print(node)
+        print("========================")
+        print(output)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--command',
+        type=str,
+        required=True,
+        help="Command to be run"
+    )
+    parser.add_argument(
+        '--hosts',
+        type=str,
+        required=True,
+        help="List of hosts on which to run - these are separated by newlines.",
+    )
+
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    command = args.command
+    host_list = args.hosts.split('\n')
+    pretty_print(run_appropriate_command(host_list, command))

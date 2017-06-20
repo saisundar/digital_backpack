@@ -31,4 +31,3 @@ Repme() {
 }
 
 _repos=(`ls ~/scratchspace/repos`)
-compctl -k _repos Repme
