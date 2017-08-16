@@ -8,8 +8,8 @@ tmp=$HOME/.vim/tmp
 src="$tmp/src"
 old_dst=$HOME/bin/vim7.4
 dst=$HOME/bin/vim-7.4
-python27_config=/usr/lib/python2.7/config
-python26_config=/usr/lib/python2.6/config
+python27_config=/usr/lib/python2.7/config-x86_64-linux-gnu/
+python26_config=/usr/lib/python2.6/config-x86_64-linux-gnu/
 python_config=
 
 if [ -d "$python27_config" ]; then
@@ -26,9 +26,9 @@ fi
 
 if [[ -d "$src" ]]; then
     cd $src
-    hg pull && hg update || exit 1
+    git fetch && git pull || exit 1
 else
-    hg clone https://vim.googlecode.com/hg/ $src || exit 1
+    git clone https://github.com/vim/vim $src || exit 1
     cd $src
 fi
 
