@@ -16,6 +16,7 @@ alias mux="~/digi_backpack/tmux-agent"
 alias gmnf="gm --no-ff"
 
 
+
 Col() { awk '{print $('$(echo $* | sed -e s/-/NF-/g -e 's/ /),$(/g')')}'; }
 
 GitGrab() {

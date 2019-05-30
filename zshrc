@@ -1,14 +1,19 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+bindkey "[1;3A" forward-word
+bindkey "[1;3B" backward-word
+export TERM="xterm-256color"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="half-life"
+#ZSH_THEME="half-life"
+#ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="miloshadzic"
-#ZSH_THEME="nanotech"
+#ZSH_THEME="pure"
 #ZSH_THEME="juanghurtado"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -53,15 +58,16 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bower completion common-aliases docker git git-flow gitfast git-extras git-prompt pip python tmux)
+alias tmux="~/digi_backpack/tmux-agent"
+plugins=(aws bower completion common-aliases docker git git-flow gitfast git-extras git-prompt pip python tmux)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nail/sys/bin/:/nail/scripts/"
 # export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
-export EDITOR='vim'
+export EDITOR='/usr/bin/vim8'
+export VISUAL='/usr/bin/vim8'
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -86,4 +92,9 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+zstyle ':completion:*:*:(^rm):*:*' ignored-patterns '*?.pyc' '*templates/*.py' '*htdocs/*.py'
 source ~/digi_backpack/sai_alias
+compctl -k _repos Repme
+export PATH=~/digi_backpack/bin/:/nail/workflow/:$PATH
+eval "$(aactivator init)"
+#. /nail/home/saisundr/myapps/powerline/bindings/zsh/powerline.zsh

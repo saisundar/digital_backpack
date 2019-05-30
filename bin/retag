@@ -1,0 +1,9 @@
+#!/bin/bash
+ 
+if [[ $1 == "--rebuild" || ! -e tags ]]; then
+    CTAGSPARM=""
+else
+    CTAGSPARM="-newer tags"
+fi
+ 
+ctags -L <(find . \( -name '*.py' -o -name '*.tmpl' \) -not -regex './.*templates.*py' -not -path './acceptance/venv*' -not -path './virtualenv_*' -not -path './yelp/datawarehouse/*' -not -path './.tox/*' $CTAGSPARM) --fields=+iaS --python-kinds=-i --sort=yes --extra=+q --append
