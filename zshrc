@@ -73,8 +73,8 @@ plugins=(aws bower completion common-aliases docker git git-flow gitfast git-ext
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nail/sys/bin/:/nail/scripts/"
 # export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
-export EDITOR='/usr/bin/vim8'
-export VISUAL='/usr/bin/vim8'
+export EDITOR='/usr/bin/vim'
+export VISUAL='/usr/bin/vim'
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -103,7 +103,6 @@ zstyle ':completion:*:*:(^rm):*:*' ignored-patterns '*?.pyc' '*templates/*.py' '
 source ~/digi_backpack/sai_alias
 compctl -k _repos Repme
 export PATH=~/digi_backpack/bin/:/nail/workflow/:$PATH
-eval "$(aactivator init)"
 #. /nail/home/saisundr/myapps/powerline/bindings/zsh/powerline.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
