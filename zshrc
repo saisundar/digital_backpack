@@ -65,7 +65,6 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-alias tmux="~/digi_backpack/tmux-agent"
 plugins=(aws bower common-aliases docker git git-flow gitfast git-extras git-prompt pip python tmux)
 
 # User configuration
