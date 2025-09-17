@@ -70,7 +70,7 @@ plugins=(aws bower completion common-aliases docker git git-flow gitfast git-ext
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nail/sys/bin/:/nail/scripts/"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/nail/sys/bin/:/nail/scripts/:/opt/homebrew/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
 export EDITOR='/usr/bin/vim'
