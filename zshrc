@@ -99,7 +99,7 @@ export VISUAL='/usr/bin/vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-zstyle ':completion:*:*:(^rm):*:*' ignored-patterns '*?.pyc' '*templates/*.py' '*htdocs/*.py'
+zstyle ignored-patterns '*?.pyc' '*templates/*.py' '*htdocs/*.py'
 source ~/digi_backpack/sai_alias
 compctl -k _repos Repme
 export PATH=~/digi_backpack/bin/:/nail/workflow/:$PATH
