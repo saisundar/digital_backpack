@@ -23,19 +23,20 @@ Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'ctrlpvim/ctrlp.vim'
-"git stuff 
+"git stuff
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 "static analysis/syntax
 Plugin 'nvie/vim-flake8'
 "autocomplete
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'sickill/vim-monokai'
 
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'SirVer/ultisnips' 
+Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
@@ -70,7 +71,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-f>"
 let g:UltiSnipsJumpBackwardTrigger="<c-v>"
 
 "Flake8 settings
-let g:flake8_show_in_file=1 
+let g:flake8_show_in_file=1
 map <leader>fl :call Flake8()<CR>
 
 " YCM settings
@@ -196,7 +197,7 @@ map X ;vsplit<enter>
 if &t_Co > 1
 syntax enable
 endif
-    
+
 " Set tab settings appropriate for source code editing.
 "setlocal tabstop=4
 "setlocal softtabstop=4
@@ -209,7 +210,7 @@ set expandtab      " Tab key indents with spaces
 set shiftwidth=4   " auto-indent (e.g. >>) width
 set tabstop=4      " display width of a physical tab character
 set softtabstop=0  " disable part-tab-part-space tabbing
-               
+
 " Enable incremental search.
 set incsearch
 
