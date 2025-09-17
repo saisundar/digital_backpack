@@ -4,30 +4,8 @@ export HISTFILESIZE=20000
 export HISTSIZE=10000
 HISTTIMEFORMAT="%d/%m/%y %T "
 
-alias SR="scribereader"
-alias SRP="scribereader -e sfo2"
-alias PROD="ssh -A adhoc-sfo2"
-alias DEV="ssh -A dev2-devc"
-#alias vi="~/digi_backpack/bin/vim"
-#alias vim="~/digi_backpack/bin/vim"
-alias vi="/usr/bin/vim8"
-alias vim="/usr/bin/vim8"
 alias mux="~/digi_backpack/tmux-agent"
-alias gmnf="gm --no-ff"
-
-
-
 Col() { awk '{print $('$(echo $* | sed -e s/-/NF-/g -e 's/ /),$(/g')')}'; }
-
-GitGrab() {
-
-paths="git@git.yelpcorp.com:"
-paths="$paths$1"
-echo $paths
-git clone $paths /scratch/saisundr/repos/`basename $1`
-cd ~/scratchspace/repos/`basename $1`
-
-}
 
 Repme() {
     cd ~/scratchspace/repos/$1
